@@ -167,7 +167,10 @@ const AppFooter = () => {
                     </Link>
                   ))}
 
-                  <Link href={`/12038`} as={`/12038`}>
+                  <Link
+                    href={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
+                    as={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
+                  >
                     LInk
                   </Link>
                 </div>

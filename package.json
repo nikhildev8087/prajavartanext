@@ -1,13 +1,14 @@
 {
-  "name": "prajavartanews",
+  "name": "prajavartatest",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://prajavartanext.netlify.app/",
+  "homepage": "https://test.prajavarta.com/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "NODE_ENV=production node server.js",
+    "lint": "next lint",
+    "server": "node server.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.1",

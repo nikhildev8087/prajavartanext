@@ -168,8 +168,15 @@ const AppFooter = () => {
                   ))}
 
                   <Link
-                    href={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
-                    as={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
+                    href={{
+                      pathname:
+                        "/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038",
+                      query: {
+                        slug: "BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly",
+                      },
+                    }}
+                    // href={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
+                    // as={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
                   >
                     LInk
                   </Link>

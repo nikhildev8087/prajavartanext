@@ -10,7 +10,7 @@ import CategoryNews from "@/components/CategoryNews";
 import { IMAGES } from "@/assets/images";
 import SocialFlipCard from "@/components/SocialFlipCard";
 import Link from "next/link";
-import logoBanner from "../assets/images/logo-banner.png";
+import logoBanner from "../../assets/images/logo-banner.png";
 
 const inter = Inter({ subsets: ["latin"] });
 

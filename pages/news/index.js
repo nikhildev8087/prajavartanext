@@ -1,25 +1,40 @@
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import Head from "next/head";
-import Layout from "@/components/Layout";
-import AppHeader from "@/components/AppHeader";
-import TrendingNews from "@/components/TrendingNews";
-import LocalNews from "@/components/LocalNews";
-import ImgNewsSlider from "@/components/ImgNewsSlider";
-import CategoryNews from "@/components/CategoryNews";
+"use client";
 import { IMAGES } from "@/assets/images";
+import AppHeader from "@/components/AppHeader";
+import CategoryNews from "@/components/CategoryNews";
+import ImgNewsSlider from "@/components/ImgNewsSlider";
+import Layout from "@/components/Layout";
+import LocalNews from "@/components/LocalNews";
 import SocialFlipCard from "@/components/SocialFlipCard";
+import TrendingNews from "@/components/TrendingNews";
+import { getNewsData } from "@/graph/news";
+import axios from "axios";
+import Head from "next/head";
+import Image from "next/image";
 import Link from "next/link";
-import logoBanner from "../assets/images/logo-banner.png";
+import React, { useState } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const index = ({ data, resData }) => {
+  const [listingPage, setListingPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [categoryNews, setCategoryNews] = useState([]);
+  // let cat_data;
+  // if (typeof window !== "undefined") {
+  //   // Perform localStorage action
+  //   let categoryId = localStorage.getItem("activeTab");
+  //   cat_data = JSON.parse(categoryId) || {
+  //     id: "fresh",
+  //     catName: "ताज्या बातम्या",
+  //   };
+  // }
 
-const Home = ({ data, resData }) => {
+  console.log("data", data);
+  console.log("resData", resData);
   return (
     <>
       <Head>
         <meta property="og:title" content="Home page title" />
-        <meta property="og:description" content={logoBanner} />
+        <meta property="og:description" content="home page description" />
         <meta property="og:image" content="home page thumb" />
         <meta property="og:url" content="prajavarta.com" />
         <meta property="og:type" content="website" />
@@ -125,4 +140,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Home;
+export default index;

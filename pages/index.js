@@ -19,9 +19,9 @@ const Home = ({ data, resData }) => {
     <>
       <Head>
         <meta property="og:title" content="Home page title" />
-        <meta property="og:description" content={logoBanner} />
-        <meta property="og:image" content="home page thumb" />
-        <meta property="og:url" content="prajavarta.com" />
+        <meta property="og:description" content="test home page" />
+        <meta property="og:image" content={logoBanner} />
+        <meta property="og:url" content="test.prajavarta.com" />
         <meta property="og:type" content="website" />
       </Head>
       <Layout>

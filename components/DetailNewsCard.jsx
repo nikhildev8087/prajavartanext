@@ -78,7 +78,7 @@ const DetailNewsCard = ({ data, relatedNews }) => {
         <meta property="og:title" content={data?.news_heading} />
         <meta property="og:description" content={data?.news_heading} />
         <meta property="og:image" content={data?.news_featured_image} />
-        <meta property="og:url" content="prajavarta.com" />
+        <meta property="og:url" content="test.prajavarta.com" />
         <meta property="og:type" content="website" />
       </Head>
       <div className="mt-3 relative w-full bg-[#F8F9FA] mb-2 pb-0">

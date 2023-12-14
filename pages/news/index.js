@@ -13,6 +13,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import logoban from "../../assets/images/logo-banner.png";
 
 const index = ({ data, resData }) => {
   const [listingPage, setListingPage] = useState(1);
@@ -35,7 +36,7 @@ const index = ({ data, resData }) => {
       <Head>
         <meta property="og:title" content="Home page title" />
         <meta property="og:description" content="home page description" />
-        <meta property="og:image" content="home page thumb" />
+        <meta property="og:image" content={logoban} />
         <meta property="og:url" content="prajavarta.com" />
         <meta property="og:type" content="website" />
       </Head>

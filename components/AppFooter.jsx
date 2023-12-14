@@ -147,7 +147,6 @@ const AppFooter = () => {
                 <div className="w-full relative">
                   {categoryNews?.slice(0, 5).map((ele) => (
                     <Link
-                      target="_blank"
                       key={ele?.id}
                       href={`/${ele?.news_url}?id=${ele?.id}`}
                       as={`/${ele?.news_url}?id=${ele?.id}`}
@@ -169,11 +168,10 @@ const AppFooter = () => {
                   ))}
 
                   <Link
-                    target="_blank"
                     href={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
                     as={`/BJP-is-determined-to-win-Maval-Lok-Sabha-and-Assembly?id=12038`}
                   >
-                    liNK
+                    LInk
                   </Link>
                 </div>
               </div>

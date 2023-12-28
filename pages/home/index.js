@@ -1,90 +1,348 @@
-"use client";
-import { IMAGES } from "@/assets/images";
+import React, { useRef, useState } from "react";
+import {
+  faAngleLeft,
+  faAngleRight,
+  faAsterisk,
+  faCheckCircle,
+  faDownload,
+  faGraduationCap,
+  faHandPointUp,
+  faHeart,
+  faShareAlt,
+  faUserAstronaut,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import Slider from "react-slick";
 import AppHeader from "@/components/AppHeader";
-import CategoryNews from "@/components/CategoryNews";
-import ImgNewsSlider from "@/components/ImgNewsSlider";
-import Layout from "@/components/Layout";
-import LocalNews from "@/components/LocalNews";
-import SocialFlipCard from "@/components/SocialFlipCard";
-import TrendingNews from "@/components/TrendingNews";
-import { getNewsData } from "@/graph/news";
-import axios from "axios";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
-import logoban from "../../assets/images/logo-banner.png";
+import { MOBILE_SCREEN } from "@/assets/images";
+import Layout from "@/components/Layout";
 
-const index = ({ data, resData }) => {
-  const [listingPage, setListingPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  const [categoryNews, setCategoryNews] = useState([]);
-  // let cat_data;
-  // if (typeof window !== "undefined") {
-  //   // Perform localStorage action
-  //   let categoryId = localStorage.getItem("activeTab");
-  //   cat_data = JSON.parse(categoryId) || {
-  //     id: "fresh",
-  //     catName: "ताज्या बातम्या",
-  //   };
-  // }
+const Main = () => {
+  const customeSlider = useRef();
 
-  console.log("data", data);
-  console.log("resData", resData);
+  const gotoNext = () => {
+    customeSlider.current.slickNext();
+  };
+
+  const gotoPrev = () => {
+    customeSlider.current.slickPrev();
+  };
+
+  const [sliderSettings, setSliderSettings] = useState({
+    dots: false,
+    infinite: true,
+    arrow: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    // fade: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 760,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  });
   return (
     <>
-      <Head>
-        <meta property="og:title" content="Home page title" />
-        <meta property="og:description" content="home page description" />
-        <meta property="og:image" content={logoban} />
-        <meta property="og:url" content="prajavarta.com" />
-        <meta property="og:type" content="website" />
-      </Head>
       <Layout>
         <div className="lg:px-4 md:px-4 sm:px-0 px-0">
-          <AppHeader headerActive={true} />
-          <div className="mt-3 md:px-4 lg:px-4 sm:px-0 px-0">
-            <TrendingNews />
-            <div className=" mb-3">
-              <div className="grid  grid-cols-12 gap-2">
-                <LocalNews />
-                <div className="lg:col-span-5 md:col-span-5 sm:col-span-12 col-span-12 ">
-                  <ImgNewsSlider />
+          <AppHeader headerActive={false} />
+        </div>
+        <div className="fixed-bg fixed left-0 right-0 bottom-0 bg-[#e4e8ea] z-[-1] ">
+          <Image
+            alt="coverbg"
+            className="h-full w-full"
+            src={MOBILE_SCREEN?.coverbg2}
+          />
+        </div>
+        <div className="relative ">
+          <div
+            className="min-h-full-[90vh] overflow-hidden bg-[url('https://prajavarta.com/assets/img/bg/bg-9.png')]"
+            style={{
+              backgroundImage: `url("https://prajavarta.com/assets/img/bg/bg-9.png")`,
+            }}
+          >
+            {/* <img src='https://prajavarta.com/assets/img/bg/bg-9.png' /> */}
+            <div className="mx-8 py-20">
+              <div className="grid grid-cols-2 mx-8">
+                <div className="lg:col-span-1 md:col-span-1 col-span-2">
+                  <div className="relative">
+                    <div className="relative lg:h-[600px] md:h-[450px] sm:h-[300px] h-[250px]">
+                      <Image
+                        alt="mobilescreen"
+                        className=" p-4 object-cover  mx-auto "
+                        // src="https://prajavarta.com/assets/img/mobile-screens/login.png"
+                        src={MOBILE_SCREEN?.login}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:col-span-1 md:col-span-1 col-span-2">
+                  <div className="text-white">
+                    <h1 className="lg:text-6xl md:text-3xl sm:text-3xl font-extrabold mb-6">
+                      <span className="lg:text-5xl md:text-3xl sm:text-3xl mb-2">
+                        PrajaVarta
+                      </span>
+                      <br />
+                      INFOTAINMENT APPLICATION
+                    </h1>
+                    <p className="lg:text-2xl md:text-2xl sm:text-lg font-medium mb-8">
+                      Get the latest update of News, Entertainment, Day Special,
+                      Motivation, Sports, Education, Horoscope and much more at
+                      one place.
+                    </p>
+                    <Link
+                      href="/"
+                      className="rounded-full text-blue-600 bg-white px-4 py-3  text-lg font-medium"
+                    >
+                      <FontAwesomeIcon className="mr-2" icon={faDownload} />
+                      Download App
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white p-[7px] w-full"></div>
 
-                  <CategoryNews />
+          <div className="section-2 py-28 px-20">
+            <div className="relative w-full">
+              <div className="grid grid-cols-12 items-center justify-center">
+                <div className="lg:col-span-6 md:col-span-6 sm:col-span-12 col-span-12">
+                  <div>
+                    <h1 className="text-5xl font-extrabold mb-5">
+                      About The{" "}
+                      <span className="text-[#000099]">Prajavarta</span>
+                    </h1>
+                    <p className="mb-12 text-lg font-medium">
+                      Prajavarta is all in one infotainment platform where you
+                      can get regular updates of National, International &
+                      Technology news, Entertainment, Day Special, Motivation,
+                      Sports, Education, Horoscope & much more completely free.
+                    </p>
+                    <div>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faHeart}
+                        />
+                        Trusted by all users
+                      </p>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faCheckCircle}
+                        />
+                        Verified News
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:col-span-6 md:col-span-12 col-span-12">
+                  <div className="relative animate-scaleimage">
+                    <Image
+                      alt="desc"
+                      // src="https://prajavarta.com/assets/img/mobile-screens/desc-1.png"
+                      src={MOBILE_SCREEN?.desc1}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mx-4">
+            <div className="p-10 bg-white rounded-lg">
+              <div>
+                <h1 className="mb-12 lg:text-4xl md:text-3xl text-xl font-extrabold">
+                  PrajaVarta <span className="text-[#000099]">Screenshots</span>
+                </h1>
+              </div>
+
+              <div className="mx-4 relative">
+                <button
+                  onClick={() => gotoNext()}
+                  className="absolute top-[50%] left-0 bg-white h-10 w-10 flex items-center justify-center rounded-full z-20"
+                >
+                  <FontAwesomeIcon
+                    className="text-[#1F88E4]"
+                    icon={faAngleLeft}
+                  />
+                </button>
+                <Slider {...sliderSettings} ref={customeSlider}>
+                  <div className="mx-2 px-2 h-full">
+                    <Image alt="" className="mx-2" src={MOBILE_SCREEN?.m1} />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      src={MOBILE_SCREEN?.m2}
+                      // src="https://prajavarta.com/assets/img/mobile-screens/2.png"
+                    />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      // src="https://prajavarta.com/assets/img/mobile-screens/3.png"
+                      src={MOBILE_SCREEN?.m3}
+                    />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      src={MOBILE_SCREEN?.m4}
+                      // src="https://prajavarta.com/assets/img/mobile-screens/4.png"
+                    />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      src={MOBILE_SCREEN?.m5}
+                      // src="https://prajavarta.com/assets/img/mobile-screens/5.png"
+                    />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      src={MOBILE_SCREEN?.m6}
+                      // src="https://prajavarta.com/assets/img/mobile-screens/6.png"
+                    />
+                  </div>
+                  <div className="mx-2 px-2 h-full">
+                    <Image
+                      alt=""
+                      className="mx-2"
+                      src={MOBILE_SCREEN?.m7}
+                      // src="https://prajavarta.com/assets/img/mobile-screens/7.png"
+                    />
+                  </div>
+                </Slider>
+
+                <button
+                  onClick={() => gotoPrev()}
+                  className="absolute top-[50%] right-0 bg-white h-10 w-10 flex items-center justify-center rounded-full z-20"
+                >
+                  <FontAwesomeIcon
+                    className="text-[#1F88E4]"
+                    icon={faAngleRight}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="section-2 py-28 px-20">
+            <div className="relative w-full">
+              <div className="grid grid-cols-12 items-center justify-center">
+                <div className="lg:col-span-6 md:col-span-6 col-span-12">
+                  <div className="relative ">
+                    <Image
+                      className="animate-scaleimage"
+                      // src="https://prajavarta.com/assets/img/mobile-screens/desc-2.png"
+                      src={MOBILE_SCREEN?.desc2}
+                    />
+                  </div>
                 </div>
 
-                {/* <LocalNewsMobile /> */}
-
-                <div className="col-span-12 mx-auto sm:block lg:hidden md:hidden ">
-                  <div className="relative flex items-center text-center mx-4 h-full w-72 ">
-                    <Image
-                      alt="slide imag"
-                      className="h-full object-cover w-full"
-                      src={IMAGES?.sliderImg}
-                    />
-                    <div className="absolute bottom-[20px] left-[20px] right-[20px] text-white text-center">
-                      <h4 className="mb-2 mt-0 ">प्रजावार्ता</h4>
-                      <p>
-                        <small>
-                          महाराष्ट्राचे पहिले हायपर लोकल न्यूज अँड इंफोटेन्मेन्ट
-                          ऍप, बातम्यांसोबत बरेच काही
-                        </small>
-                      </p>
+                <div className="lg:col-span-6 md:col-span-6 col-span-12">
+                  <div>
+                    <h1 className="lg:text-5xl md:text-4xl text-2xl font-extrabold mb-10">
+                      To receive the daily updates from local to global news,{" "}
+                      <span className="text-[#000099]">
+                        To receive the daily updates from local to global news,{" "}
+                      </span>
+                    </h1>
+                    <div>
                       <Link
-                        href="https://play.google.com/store/apps/details?id=com.prajavarta"
-                        target="_blank"
-                        className="px-4 py-1 border rounded text-sm mt-2"
+                        href="/home"
+                        className="px-6 py-3 rounded-full bg-[#000099] text-white text-lg"
                       >
-                        Install Now
+                        <FontAwesomeIcon
+                          className="mr-2"
+                          icon={faHandPointUp}
+                        />
+                        Subscribe
                       </Link>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <div className="lg:col-span-3 md:col-span-3 sm:col-span-12 col-span-12  lg:block md:block lg:sticky lg:top-[52px] md:sticky md:top-[52px] relative h-full">
-                  <div className="h-full">
-                    <SocialFlipCard />
+          <div className="bg-white p-[7px] w-full"></div>
+
+          <div className="section-2 py-28 px-20">
+            <div className="relative w-full">
+              <div className="grid grid-cols-12 items-center justify-center">
+                <div className="lg:col-span-6 md:col-span-6 col-span-12">
+                  <div>
+                    <h1 className="lg:text-5xl md:text-4xl text-xl font-extrabold mb-5">
+                      Other Amazing <br />{" "}
+                      <span className="text-[#000099]">Feature</span>
+                    </h1>
+                    <div>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faUserAstronaut}
+                        />
+                        Motivational Quotes
+                      </p>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faShareAlt}
+                        />
+                        Daily Special
+                      </p>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faAsterisk}
+                        />
+                        Daily Heroscope
+                      </p>
+                      <p className="mb-3 text-lg">
+                        <FontAwesomeIcon
+                          className="mr-2 text-[#000099]"
+                          icon={faGraduationCap}
+                        />
+                        Education
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="lg:col-span-6 md:col-span-6 col-span-12">
+                  <div className="relative animate-scaleimage">
+                    <Image
+                      alt="desc3"
+                      // src="https://prajavarta.com/assets/img/mobile-screens/desc-3.png"
+                      src={MOBILE_SCREEN?.desc3}
+                    />
                   </div>
                 </div>
               </div>
@@ -96,49 +354,4 @@ const index = ({ data, resData }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const value = {
-    salt: "699",
-    sign: "3df6d220fa247a377807a130090b831d",
-    package_name: "com.prajavarta",
-    method_name: "get_single_news",
-    news_id: "12038",
-    user_id: "",
-  };
-
-  const encodedData = btoa(JSON.stringify(value));
-
-  const formdata = new FormData();
-  formdata.append("data", encodedData);
-
-  const WEB_URL = "https://prajavarta.com/Admin/api_v1.php";
-
-  try {
-    const response = await axios.post(`${WEB_URL}`, formdata);
-    const data = response?.data?.ALL_IN_ONE_NEWS[0];
-
-    const values = {
-      method_name: "get_category",
-    };
-    const resData = await getNewsData(values).then((res) => {
-      return res?.data?.ALL_IN_ONE_NEWS;
-    });
-
-    return {
-      props: {
-        data,
-        resData,
-      },
-    };
-  } catch (err) {
-    console.error(err);
-    return {
-      props: {
-        data: null,
-        resData: null,
-      },
-    };
-  }
-}
-
-export default index;
+export default Main;
